@@ -1,0 +1,36 @@
+<nav class="navbar">
+  <div class="container navbar-content">
+    <div class="navbar-brand">
+      <a routerLink="/" class="logo">
+        <span class="logo-icon">🎨</span>
+        <span class="logo-text">ArtGallery</span>
+      </a>
+    </div>
+
+    <button class="mobile-menu-btn" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="navbar-menu" [class.active]="isMenuOpen">
+      <a routerLink="/" 
+         class="nav-link" 
+         [class.active]="isActive('/')"
+         (click)="toggleMenu()">
+        Home
+      </a>
+      <a routerLink="/artists" 
+         class="nav-link" 
+         [class.active]="isActive('/artists')"
+         (click)="toggleMenu()">
+        Artists
+      </a>
+      <a routerLink="/upload" 
+         class="nav-link btn-primary" 
+         (click)="toggleMenu()">
+        Upload Art
+      </a>
+    </div>
+  </div>
+</nav>

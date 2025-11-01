@@ -1,0 +1,95 @@
+<div class="home">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content fade-in">
+        <h1 class="hero-title">
+          Discover Amazing
+          <span class="gradient-text">Artworks</span>
+        </h1>
+        <p class="hero-subtitle">
+          Explore a curated collection of talented artists and their masterpieces from around the world
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" (click)="viewArtists()">
+            Browse Artists
+          </button>
+          <button class="btn btn-secondary" (click)="startUploading()">
+            Upload Your Art
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <div class="feature-icon">👨‍🎨</div>
+          <h3>Talented Artists</h3>
+          <p>Discover artists from diverse backgrounds and styles</p>
+        </div>
+        <div class="feature-card fade-in" style="animation-delay: 0.1s">
+          <div class="feature-icon">🖼️</div>
+          <h3>Stunning Gallery</h3>
+          <p>Browse through beautiful artworks in high quality</p>
+        </div>
+        <div class="feature-card fade-in" style="animation-delay: 0.2s">
+          <div class="feature-icon">⬆️</div>
+          <h3>Easy Upload</h3>
+          <p>Share your creations with the community effortlessly</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Artworks -->
+  <section class="featured">
+    <div class="container">
+      <h2 class="section-title">Featured Artworks</h2>
+      
+      <div *ngIf="loading" class="loading-container">
+        <div class="loading"></div>
+        <p>Loading amazing artworks...</p>
+      </div>
+
+      <div *ngIf="!loading" class="artworks-grid">
+        <div *ngFor="let artwork of featuredArtworks" class="artwork-item fade-in">
+          <div class="artwork-image">
+            <img [src]="artwork.imageUrl" [alt]="artwork.title">
+            <div class="artwork-overlay">
+              <button class="like-btn" (click)="likeArtwork(artwork)">
+                ❤️ {{ artwork.likes }}
+              </button>
+            </div>
+          </div>
+          <div class="artwork-info">
+            <h4>{{ artwork.title }}</h4>
+            <p>{{ artwork.description }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="view-more">
+        <button class="btn btn-primary" (click)="viewArtists()">
+          View All Artists
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Share Your Art?</h2>
+        <p>Join our community of talented artists and showcase your work to the world</p>
+        <button class="btn btn-primary" (click)="startUploading()">
+          Get Started
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,53 @@
+<div class="artist-list">
+  <div class="container">
+    <div class="page-header fade-in">
+      <h1>Discover Artists</h1>
+      <p>Browse through our talented community of artists from around the world</p>
+    </div>
+
+    <div class="search-bar fade-in">
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm"
+        (input)="onSearch()"
+        placeholder="Search artists by name, specialty, or location..."
+        class="search-input">
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <div *ngIf="loading" class="loading-container">
+      <div class="loading"></div>
+      <p>Loading artists...</p>
+    </div>
+
+    <div *ngIf="!loading && filteredArtists.length === 0" class="no-results">
+      <div class="no-results-icon">😔</div>
+      <h3>No artists found</h3>
+      <p>Try adjusting your search terms</p>
+    </div>
+
+    <div *ngIf="!loading && filteredArtists.length > 0" class="artists-grid">
+      <div *ngFor="let artist of filteredArtists" 
+           class="artist-card fade-in"
+           [routerLink]="['/artists', artist.id]">
+        <div class="artist-avatar">
+          <img [src]="artist.avatar" [alt]="artist.name">
+          <div class="artist-badge">{{ artist.specialty }}</div>
+        </div>
+        <div class="artist-info">
+          <h3>{{ artist.name }}</h3>
+          <p class="artist-location">📍 {{ artist.location }}</p>
+          <p class="artist-bio">{{ artist.bio }}</p>
+          <div class="artist-stats">
+            <span class="stat">
+              <strong>{{ artist.followers | number }}</strong> Followers
+            </span>
+            <span class="stat">
+              <strong>{{ artist.artworkCount || 0 }}</strong> Artworks
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

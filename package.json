@@ -1,0 +1,16 @@
+{
+  "name": "artist-gallery",
+  "version": "1.0.0",
+  "description": "Artist browsing and portfolio platform",
+  "scripts": {
+    "dev": "./run-dev.sh",
+    "start": "./run-dev.sh",
+    "setup": "./setup.sh",
+    "backend": "cd backend && node server.js",
+    "frontend": "cd frontend && npx ng serve --port 4200",
+    "install:all": "cd backend && npm install && cd ../frontend && npm install"
+  },
+  "keywords": ["angular", "artists", "gallery", "portfolio"],
+  "author": "",
+  "license": "MIT"
+}

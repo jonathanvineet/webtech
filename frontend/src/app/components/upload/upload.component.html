@@ -1,0 +1,146 @@
+<div class="upload-page">
+  <div class="container">
+    <div class="page-header fade-in">
+      <h1>Upload Your Artwork</h1>
+      <p>Share your creative masterpiece with the community</p>
+    </div>
+
+    <div class="upload-container">
+      <div class="upload-form-section fade-in">
+        <form (ngSubmit)="onSubmit()" class="upload-form">
+          <!-- Artist Selection -->
+          <div class="form-group">
+            <label for="artist">Select Artist *</label>
+            <select 
+              id="artist"
+              [(ngModel)]="selectedArtist"
+              name="artist"
+              required>
+              <option value="">Choose an artist...</option>
+              <option *ngFor="let artist of artists" [value]="artist.id">
+                {{ artist.name }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Artwork Title -->
+          <div class="form-group">
+            <label for="title">Artwork Title *</label>
+            <input 
+              type="text"
+              id="title"
+              [(ngModel)]="title"
+              name="title"
+              placeholder="Give your artwork a title"
+              required>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea 
+              id="description"
+              [(ngModel)]="description"
+              name="description"
+              placeholder="Describe your artwork, inspiration, or technique..."
+              rows="4"></textarea>
+          </div>
+
+          <!-- Tags -->
+          <div class="form-group">
+            <label for="tags">Tags (comma separated)</label>
+            <input 
+              type="text"
+              id="tags"
+              [(ngModel)]="tags"
+              name="tags"
+              placeholder="abstract, colorful, nature">
+            <small>Example: digital, portrait, surrealism</small>
+          </div>
+
+          <!-- File Upload -->
+          <div class="form-group">
+            <label for="image">Upload Image *</label>
+            <div class="file-upload-area">
+              <input 
+                type="file"
+                id="image"
+                #fileInput
+                (change)="onFileSelected($event)"
+                accept="image/*"
+                required
+                style="display: none;">
+              
+              <div *ngIf="!previewUrl" class="upload-placeholder" (click)="fileInput.click()">
+                <div class="upload-icon">📁</div>
+                <p>Click to upload or drag and drop</p>
+                <small>PNG, JPG, GIF up to 10MB</small>
+              </div>
+
+              <div *ngIf="previewUrl" class="preview-container">
+                <img [src]="previewUrl" alt="Preview">
+                <button type="button" class="remove-preview" (click)="clearPreview()">
+                  ❌
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-actions">
+            <button 
+              type="submit" 
+              class="btn btn-primary btn-large"
+              [disabled]="uploading || uploadSuccess">
+              <span *ngIf="!uploading && !uploadSuccess">🎨 Upload Artwork</span>
+              <span *ngIf="uploading">
+                <span class="loading"></span> Uploading...
+              </span>
+              <span *ngIf="uploadSuccess">✅ Upload Successful!</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Tips Section -->
+      <div class="tips-section fade-in" style="animation-delay: 0.2s">
+        <div class="tips-card">
+          <h3>📸 Upload Tips</h3>
+          <ul class="tips-list">
+            <li>
+              <strong>High Quality:</strong> Upload images with good resolution for best viewing experience
+            </li>
+            <li>
+              <strong>Good Lighting:</strong> Ensure your artwork is well-lit and clearly visible
+            </li>
+            <li>
+              <strong>Descriptive Title:</strong> Use clear and engaging titles that describe your work
+            </li>
+            <li>
+              <strong>Relevant Tags:</strong> Add tags to help others discover your artwork
+            </li>
+            <li>
+              <strong>File Format:</strong> Supported formats: JPEG, PNG, GIF, WebP
+            </li>
+          </ul>
+        </div>
+
+        <div class="stats-card">
+          <h3>🎭 Community</h3>
+          <div class="stat-row">
+            <span class="stat-label">Total Artists:</span>
+            <span class="stat-value">{{ artists.length }}</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Artworks Uploaded:</span>
+            <span class="stat-value">1000+</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Active Community:</span>
+            <span class="stat-value">Growing! 🚀</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

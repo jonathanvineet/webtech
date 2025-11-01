@@ -1,0 +1,20 @@
+<div class="artwork-card fade-in">
+  <div class="artwork-image">
+    <img [src]="artwork.imageUrl" [alt]="artwork.title">
+    <div class="artwork-overlay">
+      <button class="like-btn" (click)="onLike()">
+        ❤️ {{ artwork.likes }}
+      </button>
+    </div>
+  </div>
+  <div class="artwork-info">
+    <h4>{{ artwork.title }}</h4>
+    <p class="artwork-description">{{ artwork.description }}</p>
+    <div class="artwork-tags" *ngIf="artwork.tags && artwork.tags.length > 0">
+      <span *ngFor="let tag of artwork.tags" class="tag">#{{ tag }}</span>
+    </div>
+    <div class="artwork-meta">
+      <span class="artwork-date">{{ artwork.createdAt }}</span>
+    </div>
+  </div>
+</div>

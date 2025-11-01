@@ -1,0 +1,60 @@
+<div class="artist-detail">
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading"></div>
+    <p>Loading artist profile...</p>
+  </div>
+
+  <div *ngIf="!loading && artist" class="container">
+    <!-- Artist Header -->
+    <div class="artist-header fade-in">
+      <div class="artist-header-bg"></div>
+      <div class="artist-header-content">
+        <div class="artist-avatar-large">
+          <img [src]="artist.avatar" [alt]="artist.name">
+        </div>
+        <div class="artist-header-info">
+          <div class="artist-specialty-badge">{{ artist.specialty }}</div>
+          <h1>{{ artist.name }}</h1>
+          <p class="artist-location">📍 {{ artist.location }}</p>
+          <p class="artist-bio-large">{{ artist.bio }}</p>
+          <div class="artist-stats-large">
+            <div class="stat-item">
+              <div class="stat-value">{{ artist.followers | number }}</div>
+              <div class="stat-label">Followers</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <div class="stat-value">{{ artworks.length }}</div>
+              <div class="stat-label">Artworks</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Artworks Section -->
+    <div class="artworks-section">
+      <h2 class="section-title">Portfolio</h2>
+
+      <div *ngIf="artworks.length === 0" class="no-artworks">
+        <div class="no-artworks-icon">🎨</div>
+        <h3>No artworks yet</h3>
+        <p>This artist hasn't uploaded any artworks yet.</p>
+      </div>
+
+      <div *ngIf="artworks.length > 0" class="artworks-grid">
+        <app-artwork-card 
+          *ngFor="let artwork of artworks"
+          [artwork]="artwork"
+          (like)="likeArtwork(artwork)">
+        </app-artwork-card>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && !artist" class="error-message">
+    <h2>Artist Not Found</h2>
+    <p>The artist you're looking for doesn't exist.</p>
+    <a routerLink="/artists" class="btn btn-primary">Back to Artists</a>
+  </div>
+</div>
